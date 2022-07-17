@@ -122,14 +122,17 @@ export default function Home() {
   const getOwner = async () => {
     try {
       const signer = await getProviderOrSigner(true);
+      const address = await  signer.getAddress();
+      
+      
       const randomGameContract = new Contract(
         RANDOM_WINNER_CONTRACT_ADDRESS,
         abi,
         signer
       );
-      const owner = await randomGameContract.owner();
       
-      const address = await  signer.getAddress();
+      const owner = await randomGameContract.owner();
+    
       
       if(address.toString() === owner.toString()){
         setIsOwner(true);
@@ -152,7 +155,7 @@ export default function Home() {
         throw new Error("Switch your network to Mumbai Testnet.");
       }
       if(signerNeeded){
-        const signer = await web3Provider.getSigner();
+        const signer = web3Provider.getSigner();
         return signer;
       }
       return web3Provider;
