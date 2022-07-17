@@ -184,6 +184,7 @@ export default function Home() {
       getOwner();
       checkIfGameStarted();
       setInterval(() => {
+        getOwner();
         checkIfGameStarted();
       }, 2000);
     }
